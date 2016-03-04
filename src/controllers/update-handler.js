@@ -99,7 +99,7 @@ async function testAWord(update) {
     text: `Do you remeber \`${word.word}\`?`,
     parse_mode: 'Markdown',
     reply_markup: {
-      keyboard: [['Yes'], ['No'], [`/del ${word.word}`], ['Quit']],
+      keyboard: [['Yes'], ['No'], ['Quit']],
       resize_keyboard: true,
     },
   };
