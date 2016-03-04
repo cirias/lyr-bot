@@ -32,7 +32,10 @@ async function start(update) {
   result._reply = {
     method: 'sendMessage',
     chat_id: update.message.chat.id,
-    text: `Welcome!`,
+    text: `
+Hi! ${update.message.from.first_name}
+Type /help to find out how to play with me.
+`,
   };
   return result;
 }
@@ -44,8 +47,13 @@ async function help(update) {
     chat_id: update.message.chat.id,
     parse_mode: 'Markdown',
     text: `
-- /new [word...] - add new word
-- /test - start test`,
+- /new word... - add new words
+- /del word... - remove words
+- /test - take a test
+- /help - print usage
+
+**NOTE** Any text you told me without an '/' as prefix will be treated as _one_ new word.
+`,
   };
   return result;
 }
@@ -91,7 +99,7 @@ async function testAWord(update) {
     text: `Do you remeber \`${word.word}\`?`,
     parse_mode: 'Markdown',
     reply_markup: {
-      keyboard: [['Yes'], ['No'], ['Quit']],
+      keyboard: [['Yes'], ['No'], [`/del ${word.word}`], ['Quit']],
       resize_keyboard: true,
     },
   };
